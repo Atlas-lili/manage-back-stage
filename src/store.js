@@ -2,15 +2,22 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
+export default () => {
+  const store = new Vuex.Store({
+    state: {
+      // user: sessionStorage.getItem('ms_username') ? sessionStorage.getItem('ms_username') : undefined,
+      user: undefined,
+      a: 111
+    },
+    mutations: {
 
-export default new Vuex.Store({
-  state: {
+    },
+    actions: {
+      updateUser (store) {
+        store.state.user = sessionStorage.getItem('ms_username')
+      }
+    }
+  })
+  return store
+}
 
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  }
-})

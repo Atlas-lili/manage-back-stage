@@ -6,7 +6,7 @@
                 <el-input v-model="ruleForm.username" placeholder="请输入账号"></el-input>
             </el-form-item>
             <el-form-item prop="password">
-                <el-input v-model="ruleForm.password" placeholder="请输入密码"></el-input>
+                <el-input v-model="ruleForm.password" placeholder="请输入密码" type="password"></el-input>
             </el-form-item>
             <el-button
                     type="primary"
@@ -49,8 +49,9 @@
           let backData = callback(data)
           this.isLoad = !this.isLoad
           if(backData){
+            sessionStorage.setItem('ms_username',this.ruleForm.username)
             // 跳转
-            this.$router.push('/sys')
+            this.$router.replace('Sys/readme')
           } else {
             //滞留 报错
             console.log(backData)
@@ -101,7 +102,6 @@
         p{
             height: 40px;
             line-height: 40px;
-            vertical-align: center;
             font-size: 15px;
             color: #999;
         }
