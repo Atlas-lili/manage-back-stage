@@ -36,7 +36,6 @@
     mounted () {
         setInterval(() => {
           console.log(this.user)
-          this.a++
         }, 1000)
     },
     beforeRouteLeave (to, from, next) {

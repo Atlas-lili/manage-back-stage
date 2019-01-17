@@ -5,9 +5,7 @@ Vue.use(Vuex)
 export default () => {
   const store = new Vuex.Store({
     state: {
-      // user: sessionStorage.getItem('ms_username') ? sessionStorage.getItem('ms_username') : undefined,
-      user: undefined,
-      a: 111
+      user: undefined
     },
     mutations: {
 

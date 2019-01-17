@@ -1,12 +1,22 @@
 <template>
     <div class="login">
-        <h1>后台管理系统</h1>
-        <el-form  :model="ruleForm" :rules="rules" ref="ruleForm">
-            <el-form-item prop="username">
-                <el-input v-model="ruleForm.username" placeholder="请输入账号"></el-input>
+        <el-form  :model="ruleForm" :rules="rules" ref="ruleForm"  size="mini">
+            <el-form-item>
+                <h1>后台管理系统</h1>
             </el-form-item>
-            <el-form-item prop="password">
-                <el-input v-model="ruleForm.password" placeholder="请输入密码" type="password"></el-input>
+            <el-form-item prop="userName">
+                <el-input v-model="ruleForm.userName" placeholder="请输入账号"></el-input>
+            </el-form-item>
+            <el-form-item prop="passWord">
+                <el-input v-model="ruleForm.passWord" placeholder="请输入密码" type="password"></el-input>
+            </el-form-item>
+            <el-form-item prop="code">
+                <el-col :span="11">
+                    <el-input v-model="ruleForm.code" placeholder="验证码"></el-input>
+                </el-col>
+                <el-col :span="11">
+                    <img :src="codeImg" @click="reDownLoadImg" alt="图片加载失败">
+                </el-col>
             </el-form-item>
             <el-button
                     type="primary"
@@ -22,58 +32,79 @@
 </template>
 
 <script>
+  import qs from 'qs'
   export default {
     name: "Login",
     data () {
       return {
         isLoad: false,
+        codeImg: '/api/login/admin/code',
         ruleForm: {
-          username: '',
-          password: ''
+          userName: '',
+          passWord: '',
+          code: ''
         },
         rules: {
-          username: [
+          userName: [
             { required: true, message: '请输入用户名', trigger: 'blur' }
           ],
-          password: [
+          passWord: [
             { required: true, message: '请输入密码', trigger: 'blur' }
+          ],
+          code: [
+            { required: true, message: '请输入验证码', trigger: 'blur' }
           ]
         }
       }
     },
     methods: {
       subForm (callback) {
-        if(this.isUsername && this.isPassword) {
+        if(this.isUsername && this.isPassword && this.isCode) {
           this.isLoad = !this.isLoad
-          let data = JSON.parse(JSON.stringify(this.ruleForm))
-          let backData = callback(data)
-          this.isLoad = !this.isLoad
-          if(backData){
-            sessionStorage.setItem('ms_username',this.ruleForm.username)
-            // 跳转
-            this.$router.replace('Sys/readme')
-          } else {
-            //滞留 报错
-            console.log(backData)
-          }
+          let data = qs.stringify(this.ruleForm)
+          callback(data)
         }
       },
       callback (data) {
-        console.log(data)
-        return true
+        this.$http.post('/api/login/admin/login', data)
+          .then(response => {
+            let backData =  response.data
+            this.isLoad = !this.isLoad
+            if(backData.code === 0){
+              sessionStorage.setItem('ms_username',this.ruleForm.userName)
+              // 跳转
+              this.$router.replace('Sys/readme')
+            } else {
+              //滞留 报错
+              this.reDownLoadImg()
+              this.$message.error(backData.message)
+              console.error(backData.message)
+            }
+          })
+      },
+      reDownLoadImg () {
+        var num = Date.parse(new Date())
+        this.codeImg += '?'+ num
       }
     },
     computed: {
       isUsername(){
         // username value
-        if(this.ruleForm.username){
+        if(this.ruleForm.userName){
           return true
         }
         return false
       },
       isPassword(){
         // password value
-        if(this.ruleForm.password){
+        if(this.ruleForm.passWord){
+          return true
+        }
+        return false
+      },
+      isCode() {
+        // code value
+        if(this.ruleForm.code){
           return true
         }
         return false
@@ -84,14 +115,13 @@
 
 <style lang="scss" scoped>
 .login{
-    h1{
-        color: white;
-        font-size: 30px;
-        margin-top: 15%;
-        text-align: center;
-    }
     form{
-        margin: 20px auto 0;
+        h1{
+            color: black;
+            font-size: 30px;
+            text-align: center;
+        }
+        margin: 20% auto 0;
         padding: 20px 20px;
         border-radius: 10px;
         width: 400px;
@@ -104,6 +134,9 @@
             line-height: 40px;
             font-size: 15px;
             color: #999;
+        }
+        img{
+            margin-left: 20px;
         }
     }
 }
