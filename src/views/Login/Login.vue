@@ -71,7 +71,7 @@
             let backData =  response.data
             this.isLoad = !this.isLoad
             if(backData.code === 0){
-              sessionStorage.setItem('ms_username',this.ruleForm.userName)
+              sessionStorage.setItem('ms_user',JSON.stringify({name: this.ruleForm.userName, token: backData.data.token}))
               // 跳转
               this.$router.replace('Sys/readme')
             } else {

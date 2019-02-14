@@ -28,101 +28,94 @@
 </template>
 
 <script>
-  export default {
-    name: "SysList",
-    data () {
-      return {
-        items: [
-          {
-            icon: 'el-icon-setting',
-            index: 'readme',
-            title: '首页'
-          },
-          {
-            icon: 'el-icon-menu',
-            index: '2',
-            title: '商品',
-            subs: [
-              {
-                index: 'basetable',
-                title: '基础表格'
-              },
-              {
-                index: 'vuetable',
-                title: 'Vue表格组件'
-              }
-            ]
-          },
-          {
-            icon: 'el-icon-date',
-            index: '3',
-            title: '订单',
-            subs: [
-              {
-                index: 'baseform',
-                title: '基本表单'
-              },
-              {
-                index: 'vueeditor',
-                title: '编辑器'
-              },
-              {
-                index: 'markdown',
-                title: 'markdown'
-              },
-              {
-                index: 'upload',
-                title: '文件上传'
-              }
-            ]
-          },
-          {
-            icon: 'el-icon-star-on',
-            index: '4',
-            title: '渠道',
-            subs: [
-              {
-                index: 'baseform',
-                title: '基本表单'
-              },
-              {
-                index: 'vueeditor',
-                title: '编辑器'
-              },
-              {
-                index: 'markdown',
-                title: 'markdown'
-              },
-              {
-                index: 'basecharts',
-                title: '文件上传'
-              }
-            ]
-          },
-          {
-            icon: 'el-icon-upload2',
-            index: 'drag',
-            title: '财务'
-          },
-          {
-            icon: 'el-icon-view',
-            index: 'jur',
-            title: '权限'
-          },
-          {
-            icon: 'el-icon-setting',
-            index: 'sys',
-            title: '系统'
-          }
-        ]
-      }
-    },
-    computed: {
-      onRouter() {
-        return this.$route.path.split('/')[2]
-      }
+export default {
+  name: "SysList",
+  data () {
+    return {
+      items: [
+        {
+          icon: 'el-icon-menu',
+          index: 'readme',
+          title: '首页'
+        },
+        {
+          icon: 'el-icon-service',
+          index: '2',
+          title: '号码管理',
+          subs: [
+            {
+              index: 'numberlist',
+              title: '400号码中心'
+            },
+            {
+              index: 'numberpush',
+              title: '400号码导入'
+            },
+            {
+              index: 'numberoperation',
+              title: '号码操作日志'
+            },
+            {
+              index: 'numbernew',
+              title: '最新靓号'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-setting',
+          index: '3',
+          title: '系统管理',
+          subs: [
+            {
+              index: 'rolemanage',
+              title: '操作权限管理'
+            },
+            {
+              index: 'IDmanage',
+              title: '登录账号管理'
+            },
+            {
+              index: 'clientdistribution',
+              title: '客户负责人分配'
+            },
+            {
+              index: 'noticemanage',
+              title: '系统公告管理'
+            },
+            {
+              index: 'enterpasswordchange',
+              title: '修改登录密码'
+            },
+            {
+              index: 'sfpasswordchange',
+              title: '安全密码修改'
+            },
+            {
+              index: 'IPmanage',
+              title: '登录IP管理'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-upload',
+          index: '4',
+          title: '系统维护',
+          subs: [
+            {
+              index: 'companymaintain',
+              title: '公司部门设置'
+            }
+          ]
+        }
+      ]
+    }
+  },
+  computed: {
+    onRouter() {
+      return this.$route.path.split('/')[2]
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

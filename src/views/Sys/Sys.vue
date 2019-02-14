@@ -13,6 +13,14 @@
   import SysList from './components/SysList'
   export default {
     name: "Sys",
+    data () {
+      return {
+
+      }
+    },
+    methods: {
+
+    },
     components: {
       SysHeader,
       SysList
@@ -21,5 +29,4 @@
 </script>
 
 <style lang="scss" scoped>
-
 </style>

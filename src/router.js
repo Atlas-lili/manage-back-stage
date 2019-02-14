@@ -15,7 +15,7 @@ export default new Router({
       beforeEnter (to, from, next) { // beforeEach和beforeResolve之间
         const store = createStore()
         store.dispatch('updateUser')
-        if(sessionStorage.getItem('ms_username')){
+        if(sessionStorage.getItem('ms_user')){
           next({path: '/Sys/readme'})
         } else {
           next()
@@ -29,7 +29,7 @@ export default new Router({
       beforeEnter (to, from, next) { // beforeEach和beforeResolve之间
         const store = createStore()
         store.dispatch('updateUser')
-        if(sessionStorage.getItem('ms_username')){
+        if(sessionStorage.getItem('ms_user')){
           next()
         } else {
           next({path: '/Login'})
@@ -39,26 +39,34 @@ export default new Router({
         path: 'readme',
         component: () => import('./views/Sys/routes/ReadMe')
       }, {
-        path: 'basetable',
-        component: () => import('./views/Sys/routes/BaseTable')
+        path: 'numberlist',
+        component: () => import('./views/Sys/routes/NumberList')
       }, {
-        path: 'vuetable',
-        component: () => import('./views/Sys/routes/VueTable')
+        path: 'numberpush',
+        component: () => import('./views/Sys/routes/NumberPush')
       }, {
-        path: 'baseform',
-        component: () => import('./views/Sys/routes/BaseForm')
+        path: 'numberoperation',
+        component: () => import('./views/Sys/routes/NumberOperation')
       }, {
-        path: 'vueeditor',
-        component: () => import('./views/Sys/routes/VueEditor')
+        path: 'numbernew',
+        component: () => import('./views/Sys/routes/NumberNew')
       }, {
-        path: 'markdown',
-        component: () => import('./views/Sys/routes/MarkDown')
+        path: 'IDmanage',
+        component: () => import('./views/Sys/routes/IDManage')
+      }, {
+        path: 'rolemanage',
+        component: () => import('./views/Sys/routes/RoleManage')
+      }, {
+        path: 'companymaintain',
+        component: () => import('./views/Sys/routes/CompanyMaintain')
+      }, {
+        path: 'enterpasswordchange',
+        component: () => import('./views/Sys/routes/EnterPasswordChange')
       }]
     },
     {
       path: '*',
       redirect: '/Login'
-      // redirect: '/Sys/readme'
     }
     // ,
     // {

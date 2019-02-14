@@ -3,7 +3,7 @@
         <div class="title">后台管理系统</div>
         <el-button @click="isShow = !isShow" class="user">
             <div class="user-img">
-                <img src="../img/img.jpg" alt="">
+                <img src="@/assets/img/user.jpg" alt="">
             </div>
             <p class="user-name">{{user}}</p>
         </el-button>
@@ -23,20 +23,17 @@
     },
     methods: {
       exit () {
-        sessionStorage.removeItem('ms_username')
+        sessionStorage.removeItem('ms_user')
         this.$router.replace('Login')
       }
     },
     computed: {
       user () {
         this.$store.dispatch('updateUser')
-        return this.$store.state.user
+        return this.$store.state.user.name
       }
     },
     mounted () {
-        setInterval(() => {
-          console.log(this.user)
-        }, 1000)
     },
     beforeRouteLeave (to, from, next) {
       this.$store.dispatch('updateUser')

@@ -3,12 +3,14 @@
   background: #324157 url(./assets/img/login_bg.jpg);
   background-size: 100% 100%;
 }
+.sys{
+  background-color: white;
+}
 .login, .sys{
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #324157;
 }
 .router-view{
   position: absolute;
